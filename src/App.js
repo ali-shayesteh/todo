@@ -1,23 +1,71 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import AddTodo from './components/AddTodo';
+import Container from './components/Container';
+
+const todoTypes = [
+  {
+    name: "Important & Urgnet",
+    important: true,
+    urgent: true
+  },
+  {
+    name: "Important But Not Urgnet",
+    important: true,
+    urgent: false
+  },
+  {
+    name: "Not Important But Urgnet",
+    important: false,
+    urgent: true
+  },
+  {
+    name: "Not Important & Not Urgnet",
+    important: false,
+    urgent: false
+  },
+]
 
 function App() {
+  const handleAdd = (task) =>{
+    setItems(old => ([...old, task]))
+  }
+  const [items, setItems] = useState ([
+    {
+      name: 'task1',
+      important: true,
+      urgent: true
+    },
+    {
+      name: 'task2',
+      important: true,
+      urgent: false
+    },
+    {
+      name: 'task3',
+      important: false,
+      urgent: true
+    },
+    {
+      name: 'task4',
+      important: false,
+      urgent: false
+    },
+  ])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        todoTypes.map((todo, index) =>{
+          return(
+            <Container 
+              key={index}
+              classType={todo.name}
+              items={items.filter(item => item.important === todo.important && item.urgent === todo.urgent)}
+            />
+          )
+        })
+      }
+      <AddTodo />
     </div>
   );
 }
