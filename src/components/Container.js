@@ -1,17 +1,23 @@
 import Item from "./Item"
-const Container = ({classType, items}) => {
+const Container = ({name, classType, items, handleDel, handleProperty}) => {
     return(
         <div className={`container ${classType}`}>
-            <p>{classType}</p>
-            <ul>
+            <h4>{name}</h4>
+            <div className="task-list">
                 {
                     items.map((item, index) => {
                         return(
-                            <Item key={index} name={item.name} />
+                            <Item
+                             key={item.id}
+                             task={item}
+                             handleDel={handleDel}
+                             handleProperty={handleProperty}
+                             classType={classType}
+                             />
                         )
                     })
                 }
-            </ul>
+            </div>
         </div>
     )
 }

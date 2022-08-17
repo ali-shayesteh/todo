@@ -1,5 +1,82 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.App{
+  width: 700px;
+  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+}
 .container {
   padding: 10px;
-  margin: 10px;
-  border: 1px solid #ccc;
+  width: 100%;
+  max-height: 300px;
+  overflow: auto;
+}
+.container.half {
+  width: 50%;
+}
+.container::-webkit-scrollbar {
+  width: 8px;
+}
+.container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 5px;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
+
+.task {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+}
+.task-header, .task-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.actions, .task-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;  
+}
+.actions div, .task-title {
+  cursor: pointer;
+}
+.addtask input[type=text] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+}
+.addtask input[type=submit]{
+  text-align: center;
+  padding: 5px 35px;
+}
+.addtask fieldset{
+  border: 0 none;
+  display: flex;
+  justify-content: center;
+}
+.addtask fieldset div {
+  padding: 5px;
+}
+
+@media only screen and (max-width: 700px) {
+  .App{
+    width: 95%;
+  }
+  .container.half{
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 600px) {
 }

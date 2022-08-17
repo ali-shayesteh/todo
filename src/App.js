@@ -6,66 +6,105 @@ import Container from './components/Container';
 const todoTypes = [
   {
     name: "Important & Urgnet",
-    important: true,
-    urgent: true
+    class: "half",
+    priority: true,
+    urgency: true,
+    done: false
   },
   {
-    name: "Important But Not Urgnet",
-    important: true,
-    urgent: false
+    name: "Important & Not Urgnet",
+    class: "half",
+    priority: true,
+    urgency: false,
+    done: false
   },
   {
-    name: "Not Important But Urgnet",
-    important: false,
-    urgent: true
+    name: "Not Important & Urgnet",
+    class: "half",
+    priority: false,
+    urgency: true,
+    done: false
   },
   {
     name: "Not Important & Not Urgnet",
-    important: false,
-    urgent: false
-  },
+    class: "half",
+    priority: false,
+    urgency: false,
+    done: false
+  }
 ]
 
 function App() {
-  const handleAdd = (task) =>{
+  const handleAdd = (task) => {
     setItems(old => ([...old, task]))
+  }
+  const handleDel = (id) => {
+    setItems(old => old.filter( i => i.id !== id))
+  }
+  const handleProperty = (id, item) => {
+    setItems(old => old.map(i => i.id === id ? {...i, [item]: !i[item]} : i))
   }
   const [items, setItems] = useState ([
     {
+      id: 0,
       name: 'task1',
-      important: true,
-      urgent: true
+      priority: true,
+      urgency: true,
+      done: false,
     },
     {
+      id: 1,
       name: 'task2',
-      important: true,
-      urgent: false
+      priority: true,
+      urgency: false,
+      done: false
     },
     {
+      id: 2,
       name: 'task3',
-      important: false,
-      urgent: true
+      priority: false,
+      urgency: true,
+      done: false
     },
     {
+      id: 3,
       name: 'task4',
-      important: false,
-      urgent: false
+      priority: false,
+      urgency: false,
+      done: false
     },
+    {
+      id: 4,
+      name: 'task5',
+      priority: false,
+      urgency: true,
+      done: true
+    }
   ])
   return (
     <div className="App">
       {
         todoTypes.map((todo, index) =>{
           return(
-            <Container 
-              key={index}
-              classType={todo.name}
-              items={items.filter(item => item.important === todo.important && item.urgent === todo.urgent)}
-            />
+              <Container
+                name = {todo.name}
+                key = {index}
+                classType = {todo.class}
+                handleDel={handleDel}
+                handleProperty={handleProperty}
+                items = {items.filter(item => item.done === todo.done && item.priority === todo.priority && item.urgency === todo.urgency)}
+              />
           )
         })
       }
-      <AddTodo />
+        <Container
+          name = "Done"
+          classType = "done"
+          handleDel={handleDel}
+          handleProperty={handleProperty}
+          items = {items.filter(item => item.done === true)}
+        />
+      <AddTodo handleAdd = {handleAdd} />
     </div>
   );
 }
