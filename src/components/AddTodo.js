@@ -12,7 +12,7 @@ const AddTodo = ({ handleAdd }) => {
     }
     return (
         <div className="container">
-            <h4>Add new task</h4>
+            
             <form className="addtask" onSubmit={handleSubmit}>
                 <fieldset>
                     <input onChange={e => setName(e.target.value)} value={name} name="name" id="name" type="text" />

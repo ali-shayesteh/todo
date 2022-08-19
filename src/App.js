@@ -83,6 +83,7 @@ function App() {
   ])
   return (
     <div className="App">
+      <AddTodo handleAdd = {handleAdd} />
       {
         todoTypes.map((todo, index) =>{
           return(
@@ -104,7 +105,6 @@ function App() {
           handleProperty={handleProperty}
           items = {items.filter(item => item.done === true)}
         />
-      <AddTodo handleAdd = {handleAdd} />
     </div>
   );
 }
